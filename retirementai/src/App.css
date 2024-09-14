@@ -1,13 +1,18 @@
 
 html, body{
-  height: 100%
+  background-image: url('https://i.pinimg.com/originals/f9/7b/cd/f97bcdf5afe8474461c40f955ce0ec4d.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  margin: 0;
 }
 
 .header {
   position: relative;
   width: calc(100% - 40px);
   margin-left: 20px;       
-  background-color: #333;   
+  background-color: #f8f8f8;   
   color: white;     
   text-align: center; 
 }
@@ -16,27 +21,85 @@ html, body{
   position: absolute;
   width: calc(100% - 40px);
   padding: 20px;
-  background-color: aquamarine;
   border-radius: 10px;
   display: flex;
+  justify-content: space-between; /* Spread items to edges */
+  align-items: center;
   top: 20px;
-  justify-content: space-between;
+}
+
+.logoff-container {
+  margin-left: auto; /* Pushes the container to the far right */
 }
 
 .header h1 {
-  color: #333;
+  color: white;
   padding: 0px;
   margin: 0px;
+  position: absolute;
+  left: 50%;
+  top: 80px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 4rem;
+}
+
+.fade-in {
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .header button {
-  background-color: transparent;
-  border: none;
-  border-bottom: solid 1px #333;
+  background-color: white; /* White background */
+  color: #333;             /* Dark text for contrast */
+  border: none;            /* Remove default border */
+  padding: 10px 20px;      /* Padding for better appearance */
+  cursor: pointer;         /* Change cursor to pointer */
+  border-radius: 5px;      /* Slightly rounded corners */
+}
+
+.header button:hover {
+  background-color: #f1f1f1; /* Slightly darker on hover */
 }
 
 .body {
   height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.body input:focus {
+  outline: none;
+}
+
+.body button {
+  width: 300px;
+  height: 50px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+.body button:hover {
+  background-color: #555;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.body .input-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,16 +112,33 @@ html, body{
   border-top: solid 1px lightgrey;
   border-bottom: solid 1px lightgrey;
   border-radius: 0px;
+  margin-right: 10px;
 }
 
-.body input:focus {
-  outline: none;
-}
-
-.body button {
-  width: 54px;
-  height: 54px;
+.upload-button {
+  background: none;
   border: none;
-  align-items: center;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 10px;
+  width: 50px; /* Adjust width as needed */
+  height: 50px; /* Adjust height if needed to maintain proportion */
+  display: flex;
+  align-items: center; /* Center the content */
   justify-content: center;
+}
+
+.upload-button svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.upload-button:hover svg {
+  transform: scale(1.1);
+}
+
+.upload-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
 }
