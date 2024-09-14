@@ -1,23 +1,42 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="header">
+        <div className="innerHeader">
+          <h1>Hi, Welcome to Retirement AI</h1>
+
+          <button
+            onClick={() => alert('hello')}
+          >
+            log off
+          </button>
+        </div>
+      </div>
+
+      <div className="body">
+        <div>
+          <button
+            onClick={() => alert('upload')}
+            style={{borderTopLeftRadius: 10}}
+          >
+            upload
+          </button>
+
+          <input
+            type="text"
+            placeholder="Enter what you want to learn!"
+          />
+
+          <button
+            onClick={() => alert('submit')}
+            style={{borderBottomRightRadius: 10}}
+          >
+            submit
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
