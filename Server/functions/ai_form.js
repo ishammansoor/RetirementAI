@@ -5,31 +5,36 @@ const image1 = path.join(__dirname, '../images/page-1.png');
 const image2 = path.join(__dirname, '../images/page-2.png');
 
 async function responseFromGPT(prompt) {
-  // Initialize the Generative AI client with the API key
   const genAI = new GoogleGenerativeAI(
     "AIzaSyAtLL-q6vT_TbPXyYL8WwL2cG4juyDNeBQ"
   );
 
-  // Define the system prompt
   const systemPrompt = `
-You are an AI assistant specialized in analyzing tax forms. Please parse the following 1040 form content and extract relevant financial information, but **do not extract any personal identifiable information (PII)** such as:
+    You are an AI assistant specialized in analyzing tax forms. given these financial information
 
-- Names
-- Social Security Numbers (SSN)
-- Addresses
-- Phone Numbers
-- Bank Information
-- Dependent Information
+    - Total Income: $100,000
+    - House Hold Employee Wage: $1,000
+    - Adjusted Gross income: $97,000
+    - Taxable Income: $82,000
+    - Deductions: $12,000
+    - Tax Credit: $1,000
+    - Retirement contributions: $6,000
+    - capital gains and losses: $0
+    - dependents and filing status: $10,000
+    - health savings account and flexible spending accounts: 2,000
+    - mortgage interests and property taxes: 10,000
 
-Focus solely on financial data like income amounts, deductions, credits, and other non-PII data.
+    Given this question from the User ${prompt}
+
+    Focus solely on financial data like income amounts, deductions, credits, and other non-PII data.
+    Create a step to step plan on how to get financially stable
+
+    limit the response to 100 words
 `;
 
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-
-
-
-  const result = await model.generateContent([prompt, image1, image2]);
+  const result = await model.generateContent([systemPrompt]);
 
   return result.response.text();
 }

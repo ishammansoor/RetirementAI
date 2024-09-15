@@ -1,34 +1,40 @@
 html, body{
-  background-image: url('https://i.pinimg.com/originals/f9/7b/cd/f97bcdf5afe8474461c40f955ce0ec4d.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  color: #333;
   height: 100%;
   margin: 0;
 }
 
+.texts {
+  background-image: url('https://wallpaper.dog/large/20455774.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: #333;
+  width: 100%;
+  height: 100px;
+  padding: 30px;
+}
+
+.App {
+  position: relative;
+}
+
 .header {
   position: relative;
-  width: calc(100% - 40px);
-  margin-left: 20px;       
-  background-color: #f8f8f8;   
-  color: white;     
+  width: calc(100%);
   text-align: center; 
 }
 
-.innerHeader {
-  position: absolute;
-  width: calc(100% - 40px);
-  padding: 20px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-between; /* Spread items to edges */
-  align-items: center;
-  top: 20px;
-}
-
 .logoff-container {
-  margin-left: auto; /* Pushes the container to the far right */
+  margin-left: auto;
 }
 
 .header h1 {
@@ -53,24 +59,25 @@ html, body{
 }
 
 .header button {
-  background-color: white; /* White background */
-  color: #333;             /* Dark text for contrast */
-  border: none;            /* Remove default border */
-  padding: 10px 20px;      /* Padding for better appearance */
-  cursor: pointer;         /* Change cursor to pointer */
-  border-radius: 5px;      /* Slightly rounded corners */
+  background-color: white;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;      
 }
 
 .header button:hover {
-  background-color: #f1f1f1; /* Slightly darker on hover */
+  background-color: #f1f1f1;
 }
 
 .body {
-  height: 100vh;
+  height: calc(100vh - 22vh);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: rgb(236, 236, 155);
 }
 
 
@@ -121,10 +128,10 @@ html, body{
   cursor: pointer;
   border-radius: 5px;
   padding: 10px;
-  width: 50px; /* Adjust width as needed */
-  height: 50px; /* Adjust height if needed to maintain proportion */
+  width: 50px; 
+  height: 50px; 
   display: flex;
-  align-items: center; /* Center the content */
+  align-items: center; 
   justify-content: center;
 }
 

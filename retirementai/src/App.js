@@ -1,18 +1,57 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './App.css';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import Markdown from 'react-markdown'
 
 function App() {
 
   const [text, setText] = useState()
   const [inputVal, setInputVal] = useState()
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const fileInputRef = useRef(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  var html = null;
+
+  const handleUploadClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file && file.type === 'application/pdf') {
+      setSelectedFile(file);
+      console.log('PDF file selected:', file.name);
+    } else {
+      alert('Please select a valid PDF file.');
+    }
+  };
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+  
 
   const handleInputChange = (event) => {
-    // Update the state with the new value from the input field
     setInputVal(event.target.value);
   };
 
   const submitButtonClicked = async () => {
-    const response = await fetch('http://localhost:3000', {
+    const response = await fetch('http://localhost:3000/', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -26,54 +65,64 @@ function App() {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    // Parse the response as JSON
     const data = await response.json();
-
-    // Log the message from the server response
     setText(data.message)
   }
 
   return (
     <div className="App">
       <div className="header">
-        <div className="innerHeader">
-          <h1>Hi, Welcome to Retirement AI</h1>
-
-          <button
-            onClick={() => alert('hello')}
-          >
-            log off
-          </button>
-        </div>
+        <div style={{display: "flex", justifyContent: 'center', alignItems: 'center', width: '100%'}}>
+            <div className='texts'>Hi! Welcome to AI Retirement (AIRE)</div>
+          </div>
       </div>
 
       <div className="body">
-        <div>
-          <button
-            onClick={() => alert('upload')}
-            style={{borderTopLeftRadius: 10}}
-          >
-            upload
-          </button>
+          
+        <div style={{display: 'flex', flexDirection: 'column', gap: 10}}>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            accept=".pdf"
+          />
 
           <input
             type="text"
             placeholder="Enter what you want to learn!"
             value={inputVal}
             onChange={handleInputChange}
+            style={{borderRadius: 10}}
           />
 
           <button
-            onClick={() => submitButtonClicked()}
+            onClick={() => {
+              submitButtonClicked();
+              handleOpen();
+            }}
             style={{borderBottomRightRadius: 10}}
           >
-            submit
+            SUBMIT
           </button>
+
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Here is your plan
+              </Typography>
+              <div>
+                <Markdown>{text}</Markdown>
+              </div>
+            </Box>
+          </Modal>
         </div>
 
-        <div>
-          {text}
-        </div>
+        
       </div>
     </div>
   );
